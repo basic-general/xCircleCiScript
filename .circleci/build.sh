@@ -46,6 +46,13 @@ function compile() {
   make -j$(nproc) O=out ARCH=arm64 ${DEVICE_DEFCONFIG}
   make -j$(nproc) ARCH=arm64 O=out \
 	CC=${CLANG_ROOTDIR}/bin/clang \
+        LD=${CLANG_ROOTDIR}/bin/ld.lld \
+        AR=${CLANG_ROOTDIR}/bin/llvm-ar \
+        AS=${CLANG_ROOTDIR}/bin/llvm-as \
+        NM=${CLANG_ROOTDIR}/bin/llvm-nm \
+        OBJCOPY=${CLANG_ROOTDIR}/bin/llvm-objcopy \
+        OBJDUMP=${CLANG_ROOTDIR}/bin/llvm-objdump \
+        STRIP=${CLANG_ROOTDIR}/bin/llvm-strip \
 	CROSS_COMPILE=${CLANG_ROOTDIR}/bin/aarch64-linux-gnu- \
 	CROSS_COMPILE_ARM32=${CLANG_ROOTDIR}/bin/arm-linux-gnueabi-
 
@@ -65,7 +72,7 @@ function push() {
         -F chat_id="$chat_id" \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" \
-        -F caption="Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s). | For <b>Xiaomi Redmi Note 7 (lavender)</b> | <b>$(${CLANG_ROOTDIR}/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</b>"
+        -F caption="Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s). | For <b>Xiaomi Redmi Note 8 (Ginkgo)</b> | <b>$(${CLANG_ROOTDIR}/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</b>"
 
 }
 # Fin Error
